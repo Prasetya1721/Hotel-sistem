@@ -1,38 +1,13 @@
 import type { NextAuthConfig } from "next-auth";
-import Credentials from "next-auth/providers/credentials";
-import bcrypt from "bcryptjs";
-import { prisma } from "@/lib/db";
 
+// authConfig ini dijalankan di Edge Middleware (Vercel Edge Network).
+// PENTING: Jangan import Prisma atau bcrypt di sini agar tidak crash di Edge runtime Vercel!
 export const authConfig = {
   trustHost: true,
-  secret: process.env.AUTH_SECRET || process.env.NEXTAUTH_SECRET,
+  secret: process.env.AUTH_SECRET || process.env.NEXTAUTH_SECRET || "hotelops-guard-secret-fallback-key-2026",
   session: { strategy: "jwt" },
   pages: { signIn: "/login" },
-  providers: [
-    Credentials({
-      name: "Kredensial",
-      credentials: {
-        email: { label: "Email", type: "email" },
-        password: { label: "Kata sandi", type: "password" },
-      },
-      async authorize(credentials) {
-        const email = credentials?.email as string | undefined;
-        const password = credentials?.password as string | undefined;
-        if (!email || !password) return null;
-        const user = await prisma.user.findUnique({ where: { email }, include: { property: true } });
-        if (!user || !user.isActive) return null;
-        const valid = await bcrypt.compare(password, user.passwordHash);
-        if (!valid) return null;
-        return {
-          id: user.id,
-          name: user.name,
-          email: user.email,
-          role: user.role,
-          propertyId: user.propertyId,
-        };
-      },
-    }),
-  ],
+  providers: [], // Diisi di Node.js runtime (src/auth.ts), dibiarkan kosong di Edge middleware
   callbacks: {
     authorized({ auth, request: { nextUrl } }) {
       const isLoggedIn = !!auth?.user;
