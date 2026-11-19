@@ -1,6 +1,9 @@
+import Link from "next/link";
+import { FileText } from "lucide-react";
 import PageHeader from "@/components/shared/PageHeader";
 import EmptyState from "@/components/shared/EmptyState";
 import AddGuestDialog from "@/app/(app)/guests/AddGuestDialog";
+import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import {
   Table,
@@ -30,7 +33,17 @@ export default async function GuestsPage() {
       <PageHeader
         title="Tamu"
         description="Data tamu tersimpan tanpa nomor identitas lengkap; hanya versi tersamar."
-        action={<AddGuestDialog />}
+        action={
+          <div className="flex items-center gap-2">
+            <Link href="/reports/guests">
+              <Button variant="outline" className="gap-2 font-semibold">
+                <FileText className="h-4 w-4" />
+                Laporan Tamu
+              </Button>
+            </Link>
+            <AddGuestDialog />
+          </div>
+        }
       />
       <Card>
         <CardContent className="p-0">

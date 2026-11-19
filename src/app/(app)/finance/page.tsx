@@ -1,8 +1,11 @@
+import Link from "next/link";
+import { FileText } from "lucide-react";
 import PageHeader from "@/components/shared/PageHeader";
 import StatCard from "@/components/shared/StatCard";
 import StatusBadge from "@/components/StatusBadge";
 import EmptyState from "@/components/shared/EmptyState";
 import PaymentDialog from "@/app/(app)/finance/PaymentDialog";
+import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import {
   Table,
@@ -49,6 +52,14 @@ export default async function FinancePage() {
       <PageHeader
         title="Keuangan"
         description="Ringkasan tagihan folio, rincian pembayaran, dan penerimaan transaksi hotel."
+        action={
+          <Link href="/reports/finance">
+            <Button variant="outline" className="gap-2 font-semibold">
+              <FileText className="h-4 w-4" />
+              Laporan Keuangan Lengkap
+            </Button>
+          </Link>
+        }
       />
 
       <section className="mb-6 grid gap-4 sm:grid-cols-3">

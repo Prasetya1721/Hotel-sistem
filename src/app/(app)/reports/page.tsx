@@ -1,6 +1,7 @@
 import PageHeader from "@/components/shared/PageHeader";
 import StatCard from "@/components/shared/StatCard";
 import EmptyState from "@/components/shared/EmptyState";
+import ReportNavTabs from "@/components/shared/ReportNavTabs";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { requireUser } from "@/lib/session";
 import { prisma } from "@/lib/db";
@@ -9,7 +10,7 @@ import { formatCurrencyIDR } from "@/lib/formatters";
 import { eventTypeConfig, incidentSeverityConfig } from "@/lib/design";
 import StatusBadge from "@/components/StatusBadge";
 
-export const metadata = { title: "Laporan" };
+export const metadata = { title: "Laporan Operasional & Keamanan" };
 
 export default async function ReportsPage() {
   const user = await requireUser();
@@ -17,7 +18,7 @@ export default async function ReportsPage() {
   if (!PERMISSIONS.reportsView.includes(user.role as never)) {
     return (
       <>
-        <PageHeader title="Laporan" description="Ringkasan operasional dan keamanan." />
+        <PageHeader title="Laporan Operasional &amp; Keamanan" description="Ringkasan operasional dan keamanan." />
         <EmptyState
           title="Akses terbatas"
           description="Hanya Pemilik, General Manager, Keuangan, dan Auditor yang dapat melihat laporan."
@@ -54,9 +55,11 @@ export default async function ReportsPage() {
   return (
     <>
       <PageHeader
-        title="Laporan"
-        description="Agregat 30 hari terakhir. Angka dihitung langsung dari data operasional."
+        title="Laporan Operasional &amp; Keamanan"
+        description="Agregat 30 hari terakhir. Angka dihitung langsung dari data operasional pintu dan insiden."
       />
+
+      <ReportNavTabs canViewFinance={true} canViewGuests={true} />
 
       <section className="mb-6 grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
         <StatCard label="Reservasi baru" value={String(reservations)} hint="30 hari terakhir" />
@@ -128,4 +131,3 @@ export default async function ReportsPage() {
     </>
   );
 }
-

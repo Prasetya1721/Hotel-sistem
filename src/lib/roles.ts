@@ -90,6 +90,29 @@ export const NAV_GROUPS = [
     ],
   },
   {
+    title: "Laporan",
+    items: [
+      {
+        href: "/reports/finance",
+        label: "Laporan Keuangan",
+        icon: "Wallet",
+        roles: ["OWNER", "GENERAL_MANAGER", "FINANCE", "AUDITOR"],
+      },
+      {
+        href: "/reports/guests",
+        label: "Laporan Tamu",
+        icon: "Users",
+        roles: ["OWNER", "GENERAL_MANAGER", "RECEPTIONIST", "FINANCE", "AUDITOR"],
+      },
+      {
+        href: "/reports",
+        label: "Laporan Operasional",
+        icon: "FileText",
+        roles: ["OWNER", "GENERAL_MANAGER", "FINANCE", "AUDITOR"],
+      },
+    ],
+  },
+  {
     title: "Administrasi",
     items: [
       { href: "/users", label: "Pengguna", icon: "UserCog", roles: ["OWNER", "GENERAL_MANAGER", "DEVICE_ADMIN"] },
@@ -98,12 +121,6 @@ export const NAV_GROUPS = [
         label: "Perangkat",
         icon: "Cpu",
         roles: ["OWNER", "GENERAL_MANAGER", "DEVICE_ADMIN", "SECURITY"],
-      },
-      {
-        href: "/reports",
-        label: "Laporan",
-        icon: "FileText",
-        roles: ["OWNER", "GENERAL_MANAGER", "FINANCE", "AUDITOR"],
       },
     ],
   },
