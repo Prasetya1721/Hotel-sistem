@@ -7,7 +7,7 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Select } from "@/components/ui/select";
 import { updateIncidentStatus } from "@/app/(app)/security/incidents/[id]/actions";
-import { INCIDENT_TRANSITIONS } from "@/lib/incidents";
+import { INCIDENT_TRANSITIONS } from "@/lib/incident-transitions";
 import { incidentStatusConfig } from "@/lib/design";
 
 export default function IncidentActions({
