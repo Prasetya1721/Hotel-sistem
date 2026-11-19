@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "prisma db push --accept-data-loss && tsx prisma/seed.ts && next build",
+    "build": "node scripts/build.js",
     "start": "next start",
     "lint": "eslint",
     "typecheck": "tsc --noEmit",
@@ -14,8 +14,7 @@
     "db:migrate": "prisma migrate dev",
     "db:studio": "prisma studio",
     "db:seed": "tsx prisma/seed.ts",
-    "db:reset": "prisma migrate reset --force",
-    "postinstall": "prisma generate"
+    "db:reset": "prisma migrate reset --force"
   },
   "dependencies": {
     "@hookform/resolvers": "^7.0.3",
